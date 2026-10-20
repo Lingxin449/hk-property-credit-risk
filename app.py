@@ -1,7 +1,7 @@
 """港股地产信用风险预警系统 · Streamlit 只读看板
 
 性质：**纯只读**。仅读取 `preprocessed/*_v2.csv`（二期产物）与 `reports/figures/*_v2.png`；
-不重训、不拟合任何统计量、不改动任何口径（`AGENTS.md §4`/§8）。看板内所有图表与派生指标
+不重训、不拟合任何统计量、不改动任何口径（`口径纪律`/§8）。看板内所有图表与派生指标
 均由上述既有产物现场算出，不含任何硬编码读数。
 
 启动：`streamlit run app.py`
@@ -39,8 +39,14 @@ def load_pre(name: str) -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False)
 def code_to_name() -> dict:
-    """股票代码 → 公司简称（取自特征矩阵，仅用于展示）。"""
-    fm = pd.read_csv(PRE / "feature_matrix_v2.csv", usecols=["股票代码", "公司简称"])
+    """股票代码 → 公司简称（仅用于展示）。
+
+    优先读 `preprocessed/issuers.csv`（只含代码与简称两列）；该文件不存在时
+    回退到特征矩阵，本地全量环境与对外精简环境都能跑。
+    """
+    slim = PRE / "issuers.csv"
+    src = slim if slim.exists() else PRE / "feature_matrix_v2.csv"
+    fm = pd.read_csv(src, usecols=["股票代码", "公司简称"])
     return dict(fm.drop_duplicates("股票代码")[["股票代码", "公司简称"]].values)
 
 
@@ -75,7 +81,7 @@ def main() -> None:
     st.title("港股地产信用风险预警系统 · 二期看板")
     st.caption(
         "只读展示二期（方案 E：重训 + 2025 新考卷）的 `_v2` 产物。"
-        "不重训、不拟合统计量、不改口径；切分与口径见 `AGENTS.md §4`，数值见 `docs/数据现状.md`。"
+        "不重训、不拟合统计量、不改口径；切分与口径见 `口径纪律`，数值见 `内部数值表`。"
     )
 
     with st.sidebar:
@@ -211,7 +217,11 @@ def main() -> None:
         iv = load_pre("scorecard_iv_v2.csv")
         points = load_pre("scorecard_points_v2.csv")
         scores = load_pre("scorecard_scores_v2.csv")
-        fm = load_pre("feature_matrix_v2.csv")
+        # 特征矩阵体积较大且含供应商派生数据，对外精简环境可能不带；缺失时本页其余内容照常展示
+        try:
+            fm = load_pre("feature_matrix_v2.csv")
+        except FileNotFoundError:
+            fm = None
         c2n = code_to_name()
 
         st.subheader("特征 IV / PSI 与稳定性")
@@ -230,6 +240,10 @@ def main() -> None:
 
         st.divider()
         st.subheader("分档贡献（点选公司 + 周，逐变量命中分档 → 本档得分）")
+        if fm is None:
+            st.info("特征矩阵 `feature_matrix_v2.csv` 未随本仓库分发，分档贡献不可用；"
+                    "IV 表与 risk_score 时序不受影响。")
+            return
         sub_code = sub["股票代码"].iloc[0] if not sub.empty else scores["股票代码"].iloc[0]
         fm_sub = fm[fm["股票代码"] == sub_code].sort_values("交易日期")
         dates = list(fm_sub["交易日期"].dt.date)

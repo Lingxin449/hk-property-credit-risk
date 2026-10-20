@@ -10,7 +10,7 @@ WOE/IV 评分卡（阶段 4 · 定位 A：行业通用方法论演示）
     5) 标准评分卡 —— PDO=20、基准分 600，输出「变量-分档-得分」表
     6) 双方对比   —— 评分卡 vs LightGBM（阶段 3 冻结），测试期**一次性**对照（预声明）
 
-防泄露（AGENTS §4，最高优先级）：
+防泄露（口径纪律，最高优先级）：
     - WOE/IV/分箱边界/PSI 只 fit **训练段**（2019-01-01 ~ 2022-05-31，含切点净化带剔除）；
     - 留出验证段仅用于**变量选型**（PSI / 留出 IV 复核），不 fit 分箱；
     - 测试期在变量与分箱**冻结之后**只做一次对照评估，不参与任何 fit 或选择，如实披露。
@@ -49,7 +49,7 @@ TWOWAY_COST_SUM_OUT = os.path.join(OUTPUT_DIR, f'scorecard_twoway_cost_summary{S
 REPORT_OUT = os.path.join(OUTPUT_DIR, f'scorecard_report{SUFFIX}.txt')
 FIG_DIR = os.path.join(PROJECT_ROOT, 'reports', 'figures')
 
-# ===== 参数（机器可读常量；会随进度变的数值事实见 docs/数据现状.md）=====
+# ===== 参数（机器可读常量；会随进度变的数值事实见 内部数值表）=====
 NON_FEATURE_COLS = ID_COLS + ['Is_Anomaly', 'y']
 N_INIT_BINS = 10          # 等频初分箱数（贪心合并前）
 IV_MIN = 0.02             # IV 入选门槛

@@ -3,7 +3,7 @@
 运行：python -m src.labels.build_labels
 
 标签来源：`data/events/events.csv`——人工到港交所披露易核实**公告日**后的 5 类硬信号事件。
-规则详见 `AGENTS.md §5`、`docs/方案讨论稿.md §3.4`（改良版 a'，2026-10-08 定；2026-10-09 第七轮补三点）。
+规则详见 `口径纪律`、`内部设计说明`（改良版 a'，2026-10-08 定；2026-10-09 第七轮补三点）。
 
 标签口径（先按公司合并为事件簇，再逐段打标）：
     设簇锚点 a=簇内最早事件日、簇尾 e=簇内最后事件日、下一簇锚点 n
@@ -186,11 +186,11 @@ def build_labels_for_matrix(matrix, events_by_code, report_lines, tag=''):
 def main():
     report_lines = []
     log("=" * 60, report_lines)
-    log("事件驱动标签生成（前向 8 周，规则见 AGENTS.md §5）", report_lines)
+    log("事件驱动标签生成（前向 8 周，规则见 口径纪律）", report_lines)
 
     if not os.path.exists(EVENTS_FILE):
         log(f"\n【待办】未找到事件清单 {EVENTS_FILE}", report_lines)
-        log("请先完成事件核查（见 docs/过程文档/事件核查完整方案_20261014.md），"
+        log("请先完成事件核查（见 内部记录），"
             "合并生成 events.csv 后重新运行本脚本。", report_lines)
         return
 
@@ -230,7 +230,7 @@ def main():
 def load_events_combined(paths, report_lines=None):
     """读取并合并多份事件清单（一期 `events.csv` + 二期 `events_2025.csv`），返回 (df, events_by_code)。
 
-    两份文件同 5 列 schema、事件类型字符串均已按 AGENTS §5 归一，可直接合并后按公司分组，
+    两份文件同 5 列 schema、事件类型字符串均已按 口径纪律 归一，可直接合并后按公司分组，
     由 `merge_events_into_clusters` 统一按 §5 簇规则合并。本函数只做读取 / 校验 / 去重，不做统计量拟合。
     """
     frames = []

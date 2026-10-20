@@ -2,9 +2,9 @@
 LightGBM 训练（阶段 3 · 第 2 步）
 运行：python -m src.models.train_lgbm
 
-- 监督目标：事件标签 y（新标签，定义见 AGENTS §5），不再用伪标签 Is_Anomaly
+- 监督目标：事件标签 y（新标签，定义见 口径纪律），不再用伪标签 Is_Anomaly
 - 只 fit 方案 C **训练段**（preprocessed/split_train.csv）；留出验证段仅 predict（供第 3~4 步校准/定阈）
-- **测试期本轮不评估**，留待阈值冻结后的最终回测（防泄露铁律 AGENTS §4；阶段 3 计划书）
+- **测试期本轮不评估**，留待阈值冻结后的最终回测（防泄露铁律 口径纪律；阶段 3 计划书）
 - 不复用 src/models/train_all.py —— 那是旧伪标签四层模型入口
 
 本模块的模型只 fit 训练段（一期训练段 ≤2022-05-31；二期训练段 ≤2023-12-31）；特征已由
@@ -47,7 +47,7 @@ LGBM_PARAMS = dict(
     reg_lambda=0.1,
     class_weight='balanced', # 处理 2.7% 正例的不平衡
     random_state=42,
-    n_jobs=1,                # Windows 兼容（AGENTS §6）
+    n_jobs=1,                # Windows 兼容（口径纪律）
     verbose=-1,
 )
 
@@ -134,7 +134,7 @@ def main():
     log("\n特征重要性（gain，前 8）：", report_lines)
     log(feature_importance(clf, features).head(8).to_string(index=False), report_lines)
 
-    log("\n【说明】测试期本轮不评估——模型/校准/阈值冻结后只跑一次最终回测（AGENTS §4）。", report_lines)
+    log("\n【说明】测试期本轮不评估——模型/校准/阈值冻结后只跑一次最终回测（口径纪律）。", report_lines)
 
     # 保存模型与分数（留出段原始概率供第 3 步校准）
     ensure = os.path.isdir(OUTPUT_DIR) or os.makedirs(OUTPUT_DIR, exist_ok=True)

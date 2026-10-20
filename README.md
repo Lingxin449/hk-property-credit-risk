@@ -50,8 +50,10 @@ categories, each anchored to its HKEX disclosure date:
 | Debt extension announcement | 7 |
 | **Total** | **86** |
 
-Source: [`data/events/events.csv`](data/events/events.csv). Row-level provenance and the
-verification rules are documented in the codebase's internal methodology notes.
+Source: [`data/events/events.csv`](data/events/events.csv) — five columns
+(`股票代码, 公司简称, 公告日, 事件类型, 来源链接`), so every row carries its own announcement date
+and a link to the original filing or rating action. The encoding rules and the clustering logic
+are described in [METHODOLOGY.md](METHODOLOGY.md).
 
 **2. Leakage control is structural, not promised.**
 The evaluation protocol is built so that leakage is impossible by construction:
@@ -99,7 +101,8 @@ src/eval/          One-shot test evaluation, SHAP, pseudo-vs-event label compari
                    SHAP × WOE/IV cross-check, risk-tier monotonicity
 src/backtest/      Blacklist strategy backtest (forward-looking-safe state machine,
                    placebo control, transaction costs)
-data/events/       Manually verified credit event lists
+data/events/       Manually verified credit event lists (one row per event, with source link)
+preprocessed/      Pre-computed model and backtest artefacts read by the dashboard
 reports/figures/   All figures
 app.py             Read-only Streamlit dashboard
 ```
@@ -111,10 +114,14 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The dashboard reads pre-computed artefacts and does not retrain. To run the full pipeline
-(data construction → labelling → split → training → calibration → threshold → evaluation →
-backtest), use the module entry points in `src/`; the command chain is listed in the internal
-methodology notes.
+The dashboard reads the pre-computed artefacts in `preprocessed/` (about 100 KB: backtest
+equity curves, membership, positions, SHAP importances, scorecard IV) and does not retrain
+anything. It therefore runs without the vendor data or a database.
+
+Re-running the full pipeline (data construction → labelling → split → training → calibration →
+threshold → evaluation → backtest) requires the raw vendor exports and a local SQL Server
+instance; the module entry points in `src/` are one command per stage, and each stage reads the
+previous stage's frozen output rather than refitting.
 
 **Data availability.** Raw market and financial data are licensed from a commercial vendor
 (iFinD) and are **not redistributed** in this repository. The verified event lists in

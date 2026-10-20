@@ -149,9 +149,11 @@ reporting the distinction is more useful than the drawdown number alone.
 ## 6. Reproduction
 
 Code is organised so that each stage is a single entry point, and the evaluation stages read
-frozen artefacts rather than refitting. A documentation consistency checker verifies that every
-number quoted in the project's documents matches what the data actually produce, and that every
-generated artefact is registered in the artefact index — the mechanism exists because manual
-transcription of numbers into prose is the most common source of silent drift.
+frozen artefacts rather than refitting. During development, a consistency check compared every
+number quoted in the write-up against what the pipeline actually produced, and every generated
+artefact was registered in an index — the check itself is part of the internal workflow and is
+not shipped here. The mechanism exists because manual transcription of numbers into prose is the
+most common source of silent drift: a figure that was correct in one version of the paper stays
+behind while the model is retrained.
 
 Raw data are vendor-licensed and not redistributed; see the README's data-availability note.

@@ -3,7 +3,7 @@
 运行：python -m src.models.cost_threshold
 
 在方案 C **留出验证段**上，按期望代价最小（记 C_FP=1、C_FN=k）扫描阈值并冻结。
-阈值冻结在**分数域**（LightGBM 原始分数 cut），以抗留出/测试的基础率漂移（AGENTS §4）。
+阈值冻结在**分数域**（LightGBM 原始分数 cut），以抗留出/测试的基础率漂移（口径纪律）。
 k 网格 {2,3,5,7,10}；以 k=3 为标定，确认对 k 不敏感后冻结。
 
 本模块只在留出验证段上选择阈值，不触碰测试期；不拟合任何变换统计量。
@@ -180,7 +180,7 @@ def main():
     log(frozen.to_string(index=False), report_lines)
 
     log("\n【说明】阈值冻结在**分数域**（原始分数 cut），以抗留出/测试基础率漂移；"
-        "测试期只用该冻结阈值，不参与选择（AGENTS §4）。", report_lines)
+        "测试期只用该冻结阈值，不参与选择（口径纪律）。", report_lines)
 
     with open(os.path.join(OUTPUT_DIR, f'cost_threshold_report{SUFFIX}.txt'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
