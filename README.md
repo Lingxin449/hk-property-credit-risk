@@ -161,3 +161,10 @@ instance.
 ## Availability
 
 Full pipeline, documentation and the reproducible command chain are available on request.
+
+## License
+
+Source code is released under the [MIT License](LICENSE). The verified event lists in
+`data/events/` (compiled from public HKEX filings and rating-agency announcements) and the
+figures in `reports/figures/` are included for reference; raw vendor data are not part of this
+repository and remain subject to the vendor's terms.
