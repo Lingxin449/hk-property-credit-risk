@@ -195,10 +195,10 @@ def main() -> None:
         st.divider()
         st.subheader("既有 SHAP 图（二期 `_v2`）")
         figure_files = [
-            ("蜂群图（正窗口）", "shap_蜂群图_正窗口_v2.png"),
-            ("重要度（正窗口）", "shap_重要度_正窗口_v2.png"),
-            ("个案 waterfall · 合景泰富", "shap_waterfall_合景泰富_v2.png"),
-            ("个案 waterfall · 富力地产", "shap_waterfall_富力地产_v2.png"),
+            ("蜂群图（正窗口）", "shap_beeswarm_positive_window_v2.png"),
+            ("重要度（正窗口）", "shap_importance_positive_window_v2.png"),
+            ("个案 waterfall · KWG", "shap_waterfall_KWG_v2.png"),
+            ("个案 waterfall · RF", "shap_waterfall_RF_v2.png"),
         ]
         fcols = st.columns(2)
         for i, (title, fname) in enumerate(figure_files):
@@ -230,7 +230,7 @@ def main() -> None:
         st.divider()
         st.subheader("公司评分卡得分（risk_score）时序")
         names = sorted(scores["公司简称"].unique())
-        pick_name = st.selectbox("选择公司", names, index=names.index("合景泰富") if "合景泰富" in names else 0)
+        pick_name = st.selectbox("选择公司", names, index=names.index("KWG") if "KWG" in names else 0)
         sub = scores[scores["公司简称"] == pick_name].sort_values("交易日期")
         seg_pick = st.multiselect("分段", ["训练段", "留出验证段", "测试期"],
                                   default=["训练段", "留出验证段", "测试期"])

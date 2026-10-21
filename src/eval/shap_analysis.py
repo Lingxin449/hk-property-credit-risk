@@ -6,8 +6,8 @@ SHAP 可解释性分析（阶段 3 · 第 6 步）
   → 回答业务问题「违约前 8 周，模型认为最重要的预警信号是什么？」
 - 蜂群图：正窗口（训练段 + 留出验证段）逐样本 SHAP 分布
 - 个案归因（waterfall）：
-    一期：合景泰富 1813.HK（事件 2022-09-02，留出验证段）/ 碧桂园 2007.HK（2023-10-10，测试期）
-    二期：富力地产 2777.HK（事件 2024-08-11，留出段 2024）/ 合景泰富 1813.HK（2025-08-13，考卷 2025）
+    一期：KWG 1813.HK（事件 2022-09-02，留出验证段）/ CountryGarden 2007.HK（2023-10-10，测试期）
+    二期：RF 2777.HK（事件 2024-08-11，留出段 2024）/ KWG 1813.HK（2025-08-13，考卷 2025）
 
 本模块只解释已冻结模型，不重训、不调参；SHAP 只用特征、不用标签，故不构成对测试期的信息泄露。
 """
@@ -36,13 +36,13 @@ PRE_WEEKS = 8
 # 个案：公司 / 事件日 / 所在分段（一期：留出段 + 测试期；二期：留出段 2024 + 考卷 2025）
 if IS_V2:
     CASES = [
-        {'code': '2777.HK', 'name': '富力地产', 'event': '2024-08-11', 'split': SPLIT_VALID},
-        {'code': '1813.HK', 'name': '合景泰富', 'event': '2025-08-13', 'split': SPLIT_TEST},
+        {'code': '2777.HK', 'name': 'RF', 'event': '2024-08-11', 'split': SPLIT_VALID},
+        {'code': '1813.HK', 'name': 'KWG', 'event': '2025-08-13', 'split': SPLIT_TEST},
     ]
 else:
     CASES = [
-        {'code': '1813.HK', 'name': '合景泰富', 'event': '2022-09-02', 'split': SPLIT_VALID},
-        {'code': '2007.HK', 'name': '碧桂园', 'event': '2023-10-10', 'split': SPLIT_TEST},
+        {'code': '1813.HK', 'name': 'KWG', 'event': '2022-09-02', 'split': SPLIT_VALID},
+        {'code': '2007.HK', 'name': 'CountryGarden', 'event': '2023-10-10', 'split': SPLIT_TEST},
     ]
 
 
@@ -221,8 +221,8 @@ def main():
 
     # 3) 出图
     plot_beeswarm(sv_pos, pos[features], features, base_pos,
-                  os.path.join(FIG_DIR, f'shap_蜂群图_正窗口{SUFFIX}.png'), report_lines)
-    plot_importance_bar(imp_pos.head(15), os.path.join(FIG_DIR, f'shap_重要度_正窗口{SUFFIX}.png'),
+                  os.path.join(FIG_DIR, f'shap_beeswarm_positive_window{SUFFIX}.png'), report_lines)
+    plot_importance_bar(imp_pos.head(15), os.path.join(FIG_DIR, f'shap_importance_positive_window{SUFFIX}.png'),
                         report_lines, '违约前 8 周最重要预警信号（平均 |SHAP|，正窗口）')
 
     # 4) 个案归因

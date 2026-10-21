@@ -24,8 +24,8 @@ SUFFIX = active_suffix()   # '' 一期 / '_v2' 二期
 SCORES_IN = os.path.join(OUTPUT_DIR, f'lgbm_scores{SUFFIX}.csv')
 CALIB_OUT = os.path.join(OUTPUT_DIR, f'calibrated_scores{SUFFIX}.csv')
 FIG_DIR = os.path.join(PROJECT_ROOT, 'reports', 'figures')
-FIG_OUT = os.path.join(FIG_DIR, f'校准曲线_校准前后对比{SUFFIX}.png')
-FIG_OUT_CV = os.path.join(FIG_DIR, f'校准曲线_样本外CV对比{SUFFIX}.png')
+FIG_OUT = os.path.join(FIG_DIR, f'calibration_before_after{SUFFIX}.png')
+FIG_OUT_CV = os.path.join(FIG_DIR, f'calibration_oos_cv{SUFFIX}.png')
 
 N_BINS = 10  # 可靠性图等宽分箱数
 

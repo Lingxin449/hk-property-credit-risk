@@ -22,7 +22,7 @@ SCORES_IN = os.path.join(OUTPUT_DIR, f'lgbm_scores{SUFFIX}.csv')
 CALIB_IN = os.path.join(OUTPUT_DIR, f'calibrated_scores{SUFFIX}.csv')
 FROZEN_OUT = os.path.join(OUTPUT_DIR, f'frozen_threshold{SUFFIX}.csv')
 FIG_DIR = os.path.join(PROJECT_ROOT, 'reports', 'figures')
-FIG_OUT = os.path.join(FIG_DIR, f'代价敏感性_阈值扫描{SUFFIX}.png')
+FIG_OUT = os.path.join(FIG_DIR, f'cost_sensitivity_threshold_scan{SUFFIX}.png')
 
 KS = [2, 3, 5, 7, 10]
 CALIB_PRIMARY = 'proba_isotonic'   # 主校准器（等渗），另存 Platt 作对照

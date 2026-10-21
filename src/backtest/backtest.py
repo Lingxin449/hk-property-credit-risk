@@ -350,7 +350,7 @@ def plot_v1(weeks, bench, strat, m_bench, m_strat, report_lines):
     ax.grid(alpha=0.3)
     ax.legend()
     fig.tight_layout()
-    fig.savefig(os.path.join(FIG_DIR, f'阶段5_净值曲线_黑名单vs基准{SUFFIX}.png'), dpi=150)
+    fig.savefig(os.path.join(FIG_DIR, f'backtest_equity_blacklist_vs_benchmark{SUFFIX}.png'), dpi=150)
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(11, 6))
@@ -363,7 +363,7 @@ def plot_v1(weeks, bench, strat, m_bench, m_strat, report_lines):
     ax.grid(alpha=0.3)
     ax.legend()
     fig.tight_layout()
-    fig.savefig(os.path.join(FIG_DIR, f'阶段5_回撤曲线_黑名单vs基准{SUFFIX}.png'), dpi=150)
+    fig.savefig(os.path.join(FIG_DIR, f'backtest_drawdown_blacklist_vs_benchmark{SUFFIX}.png'), dpi=150)
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
@@ -375,7 +375,7 @@ def plot_v1(weeks, bench, strat, m_bench, m_strat, report_lines):
     ax.grid(alpha=0.3)
     ax.legend()
     fig.tight_layout()
-    fig.savefig(os.path.join(FIG_DIR, f'阶段5_持仓数与黑名单规模{SUFFIX}.png'), dpi=150)
+    fig.savefig(os.path.join(FIG_DIR, f'backtest_positions_and_blacklist_size{SUFFIX}.png'), dpi=150)
     plt.close(fig)
 
 
@@ -401,7 +401,7 @@ def plot_v1_v2(weeks, bench, v1, v2, report_lines):
         a.grid(alpha=0.3)
         a.legend(fontsize=9)
     fig.tight_layout()
-    fig.savefig(os.path.join(FIG_DIR, f'阶段5_v1v2口径对比{SUFFIX}.png'), dpi=150)
+    fig.savefig(os.path.join(FIG_DIR, f'backtest_v1_v2_threshold_comparison{SUFFIX}.png'), dpi=150)
     plt.close(fig)
 
 
@@ -824,7 +824,7 @@ def plot_v3(weeks, bench, v3res, m_bench, m_v3, report_lines):
     ax.grid(alpha=0.3)
     ax.legend()
     fig.tight_layout()
-    fig.savefig(os.path.join(FIG_DIR, '阶段6_v3_净值曲线.png'), dpi=150)
+    fig.savefig(os.path.join(FIG_DIR, 'appendix_v3_equity.png'), dpi=150)
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(11, 6))
@@ -837,7 +837,7 @@ def plot_v3(weeks, bench, v3res, m_bench, m_v3, report_lines):
     ax.grid(alpha=0.3)
     ax.legend()
     fig.tight_layout()
-    fig.savefig(os.path.join(FIG_DIR, '阶段6_v3_回撤曲线.png'), dpi=150)
+    fig.savefig(os.path.join(FIG_DIR, 'appendix_v3_drawdown.png'), dpi=150)
     plt.close(fig)
     log("已保存 v3 净值 / 回撤图", report_lines)
 

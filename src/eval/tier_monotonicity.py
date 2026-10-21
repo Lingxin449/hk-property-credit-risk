@@ -50,7 +50,7 @@ OUT_COMPANY = os.path.join(OUTPUT_DIR, f'tier_monotonicity{SUFFIX}.csv')
 OUT_SUMMARY = os.path.join(OUTPUT_DIR, f'tier_monotonicity_summary{SUFFIX}.csv')
 OUT_REPORT = os.path.join(OUTPUT_DIR, f'tier_monotonicity_report{SUFFIX}.txt')
 FIG_DIR = os.path.join(PROJECT_ROOT, 'reports', 'figures')
-FIG_OUT = os.path.join(FIG_DIR, f'风险层级单调性_模型分数{SUFFIX}.png')
+FIG_OUT = os.path.join(FIG_DIR, f'tier_monotonicity_model_score{SUFFIX}.png')
 
 # 人工风险层级的有序排列（递增 = 风险越高），用于序数编码
 TIERS = ['稳健龙头', '中型开发商', '高杠杆激进型', '困境典型']

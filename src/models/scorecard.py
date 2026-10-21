@@ -508,7 +508,7 @@ def main():
         'WOE/IV 评分卡（LR）': merged['risk_score'].to_numpy(),
         'LightGBM（阶段 3 冻结）': merged['lgbm_raw'].to_numpy(),
     }
-    plot_twoway_roc(ym, score_map, os.path.join(FIG_DIR, f'upgrade4_评分卡vsLGBM_ROC{SUFFIX}.png'), report_lines)
+    plot_twoway_roc(ym, score_map, os.path.join(FIG_DIR, f'scorecard_vs_lgbm_roc{SUFFIX}.png'), report_lines)
 
     # 精度-代价双视角：代价曲线（k=K_COST，横轴=预警频率）+ 汇总
     cost_frames, summary_rows = [], []
@@ -536,7 +536,7 @@ def main():
         if not sub.empty:
             frozen_rate = float(sub['flag率'].iloc[0])
     plot_precision_cost(ym, score_map, K_COST, frozen_rate,
-                        os.path.join(FIG_DIR, f'upgrade4_精度代价双视角{SUFFIX}.png'), report_lines)
+                        os.path.join(FIG_DIR, f'scorecard_precision_cost_dual_view{SUFFIX}.png'), report_lines)
 
     # ---------- 落盘 ----------
     iv_tbl.to_csv(IV_OUT, index=False, encoding='utf-8-sig')
@@ -555,7 +555,7 @@ def main():
             bins_rows.append({'变量': f, '分档': f'({e[j]:.3f}, {e[j+1]:.3f}]', 'WOE': round(float(w[j]), 4)})
     pd.DataFrame(bins_rows).to_csv(BINS_OUT, index=False, encoding='utf-8-sig')
 
-    plot_iv_bar(iv_tbl, os.path.join(FIG_DIR, f'upgrade4_IV排序{SUFFIX}.png'), report_lines)
+    plot_iv_bar(iv_tbl, os.path.join(FIG_DIR, f'scorecard_iv_ranking{SUFFIX}.png'), report_lines)
     log(f"\n已保存：{IV_OUT} / {POINTS_OUT} / {PSI_OUT} / {SCORES_OUT} / {TWOWAY_OUT}", report_lines)
 
     with open(REPORT_OUT, 'w', encoding='utf-8') as f:

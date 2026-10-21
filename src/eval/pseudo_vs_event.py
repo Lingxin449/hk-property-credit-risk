@@ -91,7 +91,7 @@ def plot_auc_bar(table, report_lines):
     ax.legend(loc='lower left')
     ax.grid(axis='y', alpha=0.3)
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, '伪标签vs事件标签_AUC对比.png')
+    out = os.path.join(FIG_DIR, 'pseudo_vs_event_label_auc.png')
     fig.savefig(out, dpi=150)
     plt.close(fig)
     log(f"已保存 AUC 对比图：{out}", report_lines)

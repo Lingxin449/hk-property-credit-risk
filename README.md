@@ -20,7 +20,7 @@ Independent research project · Python 3.11 · LightGBM · scikit-learn · SHAP 
 | Blacklist backtest — max drawdown | **−66.5% → −44.9% (21.6 pp)** | benchmark −26.35% → v1 −11.02% (15.3 pp) |
 | Risk-tier monotonicity (Spearman ρ) | 0.690 (n = 33) | 0.840 (n = 30) |
 
-![Drawdown: blacklist overlay vs benchmark](reports/figures/阶段5_回撤曲线_黑名单vs基准.png)
+![Drawdown: blacklist overlay vs benchmark](reports/figures/backtest_drawdown_blacklist_vs_benchmark.png)
 
 *Max drawdown, blacklist overlay vs. equal-weight benchmark, held-out period 2023–2024.*
 
@@ -83,7 +83,7 @@ Risk-tier monotonicity testing checks whether model scores reproduce a manually 
 risk ordering (resilient leader < mid-tier developer < highly levered < distressed). Both phases
 are monotone and significant out of sample.
 
-![Model score by labelled risk tier](reports/figures/风险层级单调性_模型分数.png)
+![Model score by labelled risk tier](reports/figures/tier_monotonicity_model_score.png)
 
 *Company-level median score by manually labelled risk tier, out-of-sample (Spearman ρ = 0.690, n = 33).*
 
@@ -149,14 +149,14 @@ instance.
 
 | Figure | File |
 |---|---|
-| Drawdown, blacklist vs benchmark | `reports/figures/阶段5_回撤曲线_黑名单vs基准.png` |
-| Cumulative return | `reports/figures/阶段5_净值曲线_黑名单vs基准.png` |
-| Risk-tier monotonicity | `reports/figures/风险层级单调性_模型分数.png` |
-| Calibration curves | `reports/figures/校准曲线_校准前后对比.png` |
-| SHAP importance (positive window) | `reports/figures/shap_重要度_正窗口.png` |
-| SHAP beeswarm | `reports/figures/shap_蜂群图_正窗口.png` |
-| WOE/IV ranking | `reports/figures/upgrade4_IV排序.png` |
-| Scorecard vs LightGBM ROC | `reports/figures/upgrade4_评分卡vsLGBM_ROC.png` |
+| Drawdown, blacklist vs benchmark | `reports/figures/backtest_drawdown_blacklist_vs_benchmark.png` |
+| Cumulative return | `reports/figures/backtest_equity_blacklist_vs_benchmark.png` |
+| Risk-tier monotonicity | `reports/figures/tier_monotonicity_model_score.png` |
+| Calibration curves | `reports/figures/calibration_before_after.png` |
+| SHAP importance (positive window) | `reports/figures/shap_importance_positive_window.png` |
+| SHAP beeswarm | `reports/figures/shap_beeswarm_positive_window.png` |
+| WOE/IV ranking | `reports/figures/scorecard_iv_ranking.png` |
+| Scorecard vs LightGBM ROC | `reports/figures/scorecard_vs_lgbm_roc.png` |
 
 ## Availability
 

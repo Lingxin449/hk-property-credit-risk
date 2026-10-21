@@ -29,7 +29,7 @@ IV_IN = os.path.join(OUTPUT_DIR, f'scorecard_iv{SUFFIX}.csv')
 OUT_CSV = os.path.join(OUTPUT_DIR, f'shap_vs_iv{SUFFIX}.csv')
 REPORT_OUT = os.path.join(OUTPUT_DIR, f'shap_vs_iv_report{SUFFIX}.txt')
 FIG_DIR = os.path.join(PROJECT_ROOT, 'reports', 'figures')
-FIG_OUT = os.path.join(FIG_DIR, f'shap_vs_iv_双轨对照{SUFFIX}.png')
+FIG_OUT = os.path.join(FIG_DIR, f'shap_vs_iv_crosscheck{SUFFIX}.png')
 
 # SHAP 强 = 排名进前 8（与评分卡"取 IV 前 6-8 维"对齐）
 SHAP_STRONG_RANK = 8
